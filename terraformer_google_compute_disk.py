@@ -56,48 +56,6 @@ def tfstate(tfstate_resources):
 def tf_config(resources):
     return '\n\n'.join(r.config for r in resources)
 
-def test():
-    lines = '''NAME                                     ZONE          SIZE_GB TYPE        STATUS
-disk-1                                   us-central1-f 500     pd-standard READY
-disk-2                                   us-central1-f 100     pd-ssd      READY
-'''.splitlines()
-    want_config = '''resource "google_compute_disk" "disk-1" {
-    name = "disk-1"
-    type = "pd-standard"
-    zone = "us-central1-f"
-    size = "500"
-}
-
-resource "google_compute_disk" "disk-2" {
-    name = "disk-2"
-    type = "pd-ssd"
-    zone = "us-central1-f"
-    size = "100"
-}'''
-    want_full_name = 'google_compute_disk.disk-2'
-    want_state_resources = {
-        'google_compute_disk.disk-2': {
-            'type': 'google_compute_disk',
-            'primary': {
-                'id': 'disk-2',
-                'attributes': {
-                    'id': 'disk-2',
-                    'name': 'disk-2',
-                    'self_link': 'https://www.googleapis.com/compute/v1/projects/my-project/zones/us-central1-f/disks/disk-2',
-                    'size': '100',
-                    'type': 'pd-ssd',
-                    'zone': 'us-central1-f'
-                }
-            }
-        }
-    }
-    got = list(from_gcloud_compute_disks_list('my-project', lines))
-    got_config = tf_config(got)
-    got_state_resources = tfstate_resources([got[-1]])
-    assert got_config == want_config
-    assert got_state_resources == want_state_resources
-    print('Tests passed')
-
 if __name__ == '__main__':
     import argparse
     import fileinput
@@ -106,7 +64,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--project', required=True, help='The Project ID of the Google Developer Project')
     parser.add_argument('--tfstate', action='store_true')
-    parser.add_argument('--test', action='store_true')
     args = parser.parse_args()
 
     if args.test:
