@@ -15,8 +15,8 @@ provider "google" {
 }
 EOF
 $ gcloud compute disks list > disks.txt
-$ terraformer-google-compute-disk.py --project my-project < disks.txt > disks.tf
-$ terraformer-google-compute-disk.py --project my-project --tfstate < disks.txt > terraform.tfstate
+$ terraformer_google_compute_disk.py --project my-project < disks.txt > disks.tf
+$ terraformer_google_compute_disk.py --project my-project --tfstate < disks.txt > terraform.tfstate
 ```
 
 You should now have a working terraform environment \o/. If you haven't
