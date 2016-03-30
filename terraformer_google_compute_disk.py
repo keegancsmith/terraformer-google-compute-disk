@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
-'''Takes output from `gcloud compute disks list` to create a terraform file
-to manage them.
+'''Takes output from `gcloud compute disks list` to create a terraform file to
+manage them.
 
-This is useful to bootstrap using terraform to manage google compute disks'''
+This is useful to bootstrap using terraform to manage existing google compute
+disks
+
+'''
 
 from collections import namedtuple
 

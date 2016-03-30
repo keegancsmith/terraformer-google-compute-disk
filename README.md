@@ -1,6 +1,7 @@
 # Terraformer Google Compute Disk
 
-Utility to bootstrap using [Terraform][1] to manage your Google Compute Disks.
+Export existing Google Compute Disks to [Terraform][1] style (tf,
+tfstate). Inspired by [dtan4/terraforming][2]
 
 ## Usage
 
@@ -36,4 +37,5 @@ This currently is hacked up to support my use case, so may generate weird
 output if you use disks differently to me. Pull Requests welcome
 
 [1]: https://www.terraform.io
-[2]: https://www.terraform.io/docs/providers/google/index.html
+[2]: https://github.com/dtan4/terraforming
+[3]: https://www.terraform.io/docs/providers/google/index.html
