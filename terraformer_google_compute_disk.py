@@ -69,10 +69,6 @@ if __name__ == '__main__':
     parser.add_argument('--tfstate', action='store_true')
     args = parser.parse_args()
 
-    if args.test:
-        test()
-        exit(0)
-
     resources = from_gcloud_compute_disks_list(args.project, fileinput.input(files=[]))
     if args.tfstate:
         r = tfstate_resources(resources)
